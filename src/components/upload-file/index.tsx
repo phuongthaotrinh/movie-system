@@ -21,35 +21,15 @@ interface ImageUploadProps {
     onChange: (value: string) => void;
     onRemove: (value: string) => void;
     value: string[];
-    hierarchy: boolean
+    hierarchy: boolean,
+    name?:string
 }
 
-export default function UploadImage({disabled, onChange, onRemove, value, max, hierarchy}: ImageUploadProps) {
-    const [isMounted, setIsMounted] = React.useState<boolean>(false);
-    const [openDialog, setOpenDialog] = React.useState<boolean>(false)
-    const [urlMount, setUrlMount] = React.useState<string | null>(null);
-
-    React.useEffect(() => {
-        setIsMounted(true);
-    }, []);
-
-    React.useEffect(() => {
-        if (urlMount) {
-            setOpenDialog(true);
-        }
-    }, [urlMount]);
-
+export default function UploadImage({disabled, onChange, onRemove, value, max, hierarchy,name}: ImageUploadProps) {
 
     const onUpload = (result: any) => {
         onChange(result?.info.secure_url);
     };
-
-    if (!isMounted) {
-        return null;
-    }
-    const handleClick = (imageURl: string) => {
-        setUrlMount(imageURl)
-    }
 
     const valueLength = value?.length;
     const firstImage = value?.at(0);
@@ -70,8 +50,6 @@ export default function UploadImage({disabled, onChange, onRemove, value, max, h
                                         <div
                                             key={firstImage}
                                             className="relative w-[200px] h-[200px] rounded-md overflow-hidden cursor-pointer"
-                                            onClick={() => handleClick(firstImage)}
-                                            onDoubleClick={() => handleClick(firstImage)}
                                         >
                                             <div className="z-10 absolute top-2 right-2">
                                                 <Button
@@ -99,8 +77,6 @@ export default function UploadImage({disabled, onChange, onRemove, value, max, h
                                                     <div
                                                         key={url}
                                                         className="relative w-[150px] h-[150px] rounded-md overflow-hidden cursor-pointer"
-                                                        onClick={() => handleClick(url)}
-                                                        onDoubleClick={() => handleClick(url)}
                                                     >
                                                         <div className="z-10 absolute top-2 right-2">
                                                             <Button
@@ -134,8 +110,6 @@ export default function UploadImage({disabled, onChange, onRemove, value, max, h
                                 <div
                                     key={url}
                                     className="relative w-[150px] h-[150px] rounded-md overflow-hidden cursor-pointer"
-                                    onClick={() => handleClick(url)}
-                                    onDoubleClick={() => handleClick(url)}
                                     title={url}
                                 >
                                     <div className="z-10 absolute top-2 right-2">
@@ -176,18 +150,6 @@ export default function UploadImage({disabled, onChange, onRemove, value, max, h
                 </CldUploadWidget>
             )}
 
-
-            {(urlMount !== undefined || true) && urlMount && (
-                <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-                    <DialogContent className="h-[40vw] ">
-                        <div className='h-2/3 w-full'>
-                            <img className="object-cover" style={{width: '300px', height: 'auto'}} alt="Image"
-                                 src={urlMount}
-                                 title={urlMount}/>
-                        </div>
-                    </DialogContent>
-                </Dialog>
-            )}
         </div>
 
 

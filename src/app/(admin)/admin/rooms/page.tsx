@@ -2,14 +2,9 @@
 
 import {HeaderPage} from "@/components/header-page/admin";
 import * as React from "react";
-import { Card, Space } from 'antd';
-
-
-
-import {Armchair, CircleDollarSignIcon} from "lucide-react"
-// import {Card, CardHeader, CardDescription, CardTitle, CardFooter, CardContent} from "@/components/ui/ca"
-import Link from "next/link";
-import {Button} from "@/components/ui/button"
+import {CardGeneral} from "@/components/admin/rooms/card-general"
+import {Card} from "antd";
+import {RoomsShell} from "@/components/admin/rooms/rooms-shell";
 
 
 interface RoomsPageProps {
@@ -31,14 +26,10 @@ export default function ProductsPage({
                 inHome={false}
             />
 
-            <Space direction="vertical" style={{ display: 'flex' }}>
-                <Card size="small" className="border border-slate-200" hoverable title="Default size card" extra={<a href="#">More</a>} >
-
-                </Card>
-                <Card size="small" hoverable title="Small size card" extra={<a href="#">More</a>} >
-
-                </Card>
-            </Space>
+            <CardGeneral/>
+            <Card>
+                <RoomsShell data={[]} pageCount={1} />
+            </Card>
         </div>
     )
 }

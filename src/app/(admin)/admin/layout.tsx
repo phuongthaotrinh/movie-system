@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
     const router = usePathname();
     const routerHistory = useRouter()
-    const suffixes = ['admin', 'movies', 'movie-types', 'test', 'setting', 'price','seats'];
+    const suffixes = ['admin', 'movies', 'movie-types', 'test', 'setting', 'price','seats','rooms', 'sliders'];
 
     const lastPart = React.useMemo(() => {
         const paths = router.split('/');
@@ -32,7 +32,7 @@ export default function RootLayout({
                             </Button>
                         </div>
                     </div>
-                    <div className="relative top-10 sm:px-5 z-[2] mt-5">
+                    <div className="relative min-h-screen h-auto top-10 sm:px-5 z-[2] mt-5">
                         {children}
                     </div>
                 </div>
@@ -42,9 +42,9 @@ export default function RootLayout({
                         <Menu/>
                     </div>
                     <div className="border-t">
-                        <div className=" main_page">
+                        <div className="main_page">
                             <div className="">
-                                    <div className="min-h-screen py-6 lg:px-8" >
+                                    <div className="min-h-screen h-auto py-6 lg:px-8" >
                                         {children}
                                     </div>
                             </div>

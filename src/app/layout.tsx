@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Providers from '@/components/providers'
+import "react-multi-carousel/lib/styles.css";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,7 +20,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
-          <div className="min-h-screen">{children}</div>
+          <div className="min-h-screen h-auto">{children}</div>
         </Providers>
       </body>
     </html>

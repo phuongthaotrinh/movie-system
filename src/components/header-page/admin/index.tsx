@@ -14,9 +14,9 @@ interface IProps {
 
 export  function HeaderPage({inHome, pageName, pageDesc, importExportShow,handleImport,handleExport}: IProps) {
     return (
-        <>
+        <div className="">
             <div className="sm:hidden md:block">
-                <Card className="p-0">
+                <Card className="p-0" bordered={false}>
                     <div className="flex items-center h-full ">
                         <div>
                             <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
@@ -42,6 +42,6 @@ export  function HeaderPage({inHome, pageName, pageDesc, importExportShow,handle
                 </Card>
             </div>
 
-        </>
+        </div>
     )
 }

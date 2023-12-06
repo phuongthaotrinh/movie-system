@@ -4,13 +4,20 @@ import React from 'react';
 import {Button, Form, Input, Select, Switch, Card, Typography} from 'antd';
 import {X} from "lucide-react"
 import {HeaderPage} from "@/components/header-page/admin";
-
+import UploadImage from "@/components/upload-file";
+import {toast} from "sonner"
+import {useCreateUser} from "@/lib/hooks/use-store"
 
 export default function SettingStore() {
     const [form] = Form.useForm();
+    const [logo, setLogo] = React.useState([]);
+    const [favicon, setFavicon] = React.useState([]);
+    const createUser = useCreateUser()
 
     const onFinish = (values: any) => {
-        console.log('Received values of form: ', values);
+        values.logo = logo.map((item) => {return {url: item}});
+        values.favicon= favicon.map((item) => {return {url: item}});
+        createUser(values);
     };
 
     return (
@@ -24,7 +31,41 @@ export default function SettingStore() {
                     layout="vertical"
                 >
                     <div className="grid grid-cols-2 gap-6 space-y-5">
-                        <div className="mt-5">
+                        <div className="space-y-5">
+                            <div>
+                                <p className="capitalize font-semibold text-sm">Avatar</p>
+                                <UploadImage
+                                    name={"logo"}
+                                    max={1}
+                                    hierarchy={false}
+                                    onRemove={(data: any) => {
+                                        setLogo(logo.filter((current) => current !== data))
+                                    }}
+                                    onChange={(data: any) => {
+                                        //@ts-ignore
+                                        setLogo([...logo, data])
+                                    }}
+                                    value={logo}
+                                />
+                            </div>
+                            <div>
+                                <p className="capitalize font-semibold text-sm">favicon</p>
+
+                                <UploadImage
+                                    name={"favicon"}
+                                    max={1}
+                                    hierarchy={false}
+                                    onRemove={(data: any) => {
+                                        setFavicon(favicon.filter((current) => current !== data))
+                                    }}
+                                    onChange={(data: any) => {
+                                        //@ts-ignore
+                                        setFavicon([...favicon, data])
+                                    }}
+                                    value={favicon}
+                                />
+
+                            </div>
 
                             <Form.Item
                                 label="Store name"
@@ -98,7 +139,7 @@ export default function SettingStore() {
                                                                                 <div key={subField.key}
                                                                                      className="flex gap-x-2">
                                                                                     <Form.Item noStyle
-                                                                                               name={[subField.name, 'value']}>
+                                                                                               name={[subField.name, 'url']}>
                                                                                         <Input
                                                                                             placeholder="https://www.facebook.yourstoresite.com"/>
                                                                                     </Form.Item>
@@ -136,7 +177,8 @@ export default function SettingStore() {
                     <Form.Item noStyle shouldUpdate>
                         {() => (
                             <Typography>
-                                <pre>{JSON.stringify(form.getFieldsValue(), null, 2)}</pre>
+                                <small> Watch social settings</small>
+                                <pre>{JSON.stringify(form.getFieldValue('socials'), null, 2)}</pre>
                             </Typography>
                         )}
                     </Form.Item>

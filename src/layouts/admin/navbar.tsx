@@ -36,6 +36,11 @@ export function Navbar({
             label: "Setting",
             active: pathname === `/admin/setting`,
         },
+        {
+            href: `/admin/sliders`,
+            label: "Sliders",
+            active: pathname === `/admin/sliders`,
+        },
 
     ];
     return (
@@ -47,8 +52,8 @@ export function Navbar({
                     className={cn(
                         "text-sm font-medium transition-colors hover:text-primary",
                         route.active
-                            ? "text-black dark:text-white"
-                            : "text-muted-foreground"
+                            ? "text-gray-400 dark:text-white"
+                            : "text-black "
                     )}
                 >
                     {route.label}

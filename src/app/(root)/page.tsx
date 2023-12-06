@@ -1,10 +1,15 @@
 import React from 'react'
+import  {ScrollToBottomButton} from "@/components/root/carousel";
 
 type Props = {}
 
 const ClientPage = (props: Props) => {
   return (
-    <div>ClientPage</div>
+    <div>
+      <ScrollToBottomButton />
+
+
+    </div>
   )
 }
 
